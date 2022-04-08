@@ -1,1 +1,64 @@
-"hello world"
+<div class="index-content-block col-12 mx-auto mt-5">
+  <div class="col-7 mx-auto">
+    <form action="/" method="post">
+      <select class="form-select form-select-lg" aria-label="Default select example" onchange="this.form.submit()"
+        name="displayCategoryId">
+
+        {{#if displayCategory}}
+
+        <option value="{{displayCategory_id}}" selected>{{displayCategory.name}}</option>
+        <option value="">--- 全部類別 ---</option>
+        {{#each category}}
+        <option value="{{this._id}}">{{this.name}}</option>
+        {{/each}}
+
+        {{else}}
+        <option value="" selected>--- 全部類別 ---</option>
+        {{#each category}}
+        <option value="{{this._id}}" name="categoryname">{{this.name}}</option>
+        {{/each}}
+
+        {{/if}}
+
+      </select>
+    </form>
+    <div class="col-8">
+      <h5 class="mt-4">總金額：</h5>
+      <h1 class="text-end fw-normal" style="font-size: 100px; color: #FF7300;">{{totalAmount}}</h1>
+    </div>
+  </div>
+
+  <div class="mt-4 mx-auto col-11 expense-list">
+    {{#if record}}
+    <ul class="list-group list-group-flush">
+      <div class="divide-line"></div>
+
+      {{#each record}}
+      <li class="list-group-item d-flex align-items-center justify-content-around">
+        <i class="{{this.categoryId.iconClassList}} fa-2x p-0 ms-2 record-icon"></i>
+
+        <div class="ms-0 col-3 my-1 d-flex flex-column">
+          <h4 class="my-0 mb-0 align-baseline">{{this.name}}</h4>
+          <span class="date-text mt-0-0 p-0">{{this.date}}</span>
+        </div>
+        <h5 class="amount ms-5 me-3 align-middle my-auto">{{this.amount}}</h5>
+
+        <div class="buttons d-flex ">
+          <a href="/records/{{this._id}}/edit" class="btn btn-secondary d-block mx-1">修改</a>
+          <form action="/records/{{this._id}}?_method=delete" method="post">
+            <button class="btn btn-danger">刪除</button>
+          </form>
+        </div>
+      </li>
+      {{/each}}
+
+    </ul>
+    {{/if}}
+    <div class="divide-line"></div>
+  </div>
+
+  <div class="text-center">
+    <a href="/records/new" class="btn" style="background-color: #FF7300; color: #FFFFFF; width: 150px" ;>新增支出</a>
+  </div>
+
+</div>
