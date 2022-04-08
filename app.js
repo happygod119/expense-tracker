@@ -1,5 +1,6 @@
 const express = require("express"); // 載入Express
 
+require("./config/mongoose"); // 引用mongoose;
 
 const app = express();
 const PORT = 3000;
