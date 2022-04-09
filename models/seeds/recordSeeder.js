@@ -1,11 +1,9 @@
-const mongoose = require("mongoose");
 const db = require("../../config/mongoose");
 
 const Record = require("../record");
 const User = require("../user");
 const Category = require("../category");
 const bcrypt = require("bcryptjs/dist/bcrypt");
-const category = require("../category");
 
 const SEED_RECORD = [
   {
