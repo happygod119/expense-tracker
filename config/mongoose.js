@@ -1,9 +1,11 @@
+if (process.env.NODE_ENV !== "production") {
+  require("dotenv").config();
+}
+
 // 載入 mongoose
 const mongoose = require("mongoose");
-const MONGODB_URI =
-  "mongodb+srv://alpha:camp@cluster0.ccgss.mongodb.net/expense-tracker?retryWrites=true&w=majority";
 // 設定連線到 mongoDB
-mongoose.connect(MONGODB_URI);
+mongoose.connect(process.env.MONGODB_URI);
 
 // 取得資料庫連線狀態
 const db = mongoose.connection;
