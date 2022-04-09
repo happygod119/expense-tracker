@@ -15,7 +15,7 @@ router.get("/new", (req, res) => {
 });
 router.post("/", (req, res) => {
   const record = req.body;
-  // record.userId = req.user._id;
+  record.userId = req.user._id;
   return Record.create(record)
     .then(() => res.redirect("/"))
     .catch((err) => console.log(err));

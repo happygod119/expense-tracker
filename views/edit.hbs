@@ -35,7 +35,7 @@
         </label>
         <div class="col-8">
           <select class="form-select" aria-label="Default select example" name="categoryId" required>
-            <option value="{{selectedCategory._id}}" selected>{{selectedCategory.name}}</option>
+            <option value="{{selected._id}}" selected>{{selected.name}}</option>
             {{#each category}}
             <option value="{{this._id}}">{{this.name}}</option>
             {{/each}}
