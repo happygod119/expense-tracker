@@ -9,17 +9,37 @@ if (process.env.NODE_ENV !== "production") {
 }
 
 const routes = require("./routes"); // 引用路由器
+const usePassport = require("./config/passport"); // 載入設定檔
 require("./config/mongoose"); // 引用mongoose;
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT;
 
 //設定使用handlebars
 app.engine("hbs", exphbs.engine({ defaultLayout: "main", extname: ".hbs" }));
 app.set("view engine", "hbs");
 
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: true,
+  })
+);
+
 app.use(bodyParser.urlencoded({ extended: true })); // 使用body-parser
 app.use(methodOverride("_method")); // 使用methodOverride
+
+usePassport(app); // 呼叫 Passport 
+app.use(flash()); // connect-flash
+app.use((req, res, next) => {
+  res.locals.isAuthenticated = req.isAuthenticated();
+  res.locals.user = req.user;
+  res.locals.success_msg = req.flash("success_msg"); // 設定 success_msg 訊息
+  res.locals.warning_msg = req.flash("warning_msg"); // 設定 warning_msg 訊息
+  res.locals.warning_msg = req.flash("loginerr_msg"); // 設定 loginerr_msg 訊息
+  next();
+});
 
 app.use(routes); // 將 request 導入路由器
 
