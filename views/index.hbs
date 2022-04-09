@@ -7,13 +7,13 @@
         {{#if displayCategory}}
 
         <option value="{{displayCategory_id}}" selected>{{displayCategory.name}}</option>
-        <option value="">--- 全部類別 ---</option>
+        <option value="">類別</option>
         {{#each category}}
         <option value="{{this._id}}">{{this.name}}</option>
         {{/each}}
 
         {{else}}
-        <option value="" selected>--- 全部類別 ---</option>
+        <option value="" selected>類別</option>
         {{#each category}}
         <option value="{{this._id}}" name="categoryname">{{this.name}}</option>
         {{/each}}
@@ -43,8 +43,8 @@
         </div>
         <h5 class="amount ms-5 me-3 align-middle my-auto">{{this.amount}}</h5>
 
-        <div class="buttons d-flex ">
-          <a href="/records/{{this._id}}/edit" class="btn btn-secondary d-block mx-1">修改</a>
+        <div class="button d-flex flex-row bd-highlight mb-1">
+          <a href="/records/{{this._id}}/edit"><button class="btn btn-secondary">修改</button></a>
           <form action="/records/{{this._id}}?_method=delete" method="post">
             <button class="btn btn-danger">刪除</button>
           </form>
