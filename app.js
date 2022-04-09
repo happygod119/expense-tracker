@@ -26,7 +26,7 @@ app.use(
     saveUninitialized: true,
   })
 );
-
+app.use(express.static("public")); //使用public設定
 app.use(bodyParser.urlencoded({ extended: true })); // 使用body-parser
 app.use(methodOverride("_method")); // 使用methodOverride
 
